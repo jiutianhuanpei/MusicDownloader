@@ -23,7 +23,9 @@ void HBItem::appendChild(HBItem *item)
 
 HBItem *HBItem::child(const int row)
 {
-    return m_childItems[row];
+    if (m_childItems.count() > row)
+        return m_childItems[row];
+    return nullptr;
 }
 
 QVariant HBItem::data(const int column)

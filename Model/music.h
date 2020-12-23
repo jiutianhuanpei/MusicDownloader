@@ -2,7 +2,10 @@
 #define MUSIC_H
 
 #include <QObject>
+#include <QVariant>
+#include <QVector>
 #include "Base/hbtools.h"
+#include "Base/commonheaders.h"
 
 
 class Artist : public QObject
@@ -75,6 +78,9 @@ public:
     void setValue(const QJsonObject json);
 
     QVector<QVariant> itemData();
+
+
+    QString showName(const NameType type);
 };
 
 
@@ -90,6 +96,8 @@ public:
     int songCount;
 
     void setValue(const QJsonObject json);
+
+
 
 };
 

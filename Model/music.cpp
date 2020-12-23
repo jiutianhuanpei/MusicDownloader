@@ -63,6 +63,20 @@ QVector<QVariant> Music::itemData()
     return list;
 }
 
+QString Music::showName(const NameType type)
+{
+    if (artists.count() > 0)
+    {
+        QString singer = artists.first()->name;
+
+        if (type == Song_Singer)
+            return QString("%1-%2").arg(name, singer);
+        if (type == Singer_Song)
+            return QString("%1-%2").arg(singer, name);
+    }
+    return name;
+}
+
 
 Artist::Artist(QObject *parent) : QObject(parent)
 {
@@ -112,7 +126,7 @@ void Album::setValue(const QJsonObject json)
     artist = new Artist();
     artist->setValue(obj);
 
-    publishTime = getDouble(json, "publishTime");
+    publishTime = (qint64)getDouble(json, "publishTime");
     size = getInt(json, "size");
     copyrightId = getInt(json, "copyrightId");
     status = getInt(json, "status");
@@ -151,3 +165,4 @@ void MusicList::setValue(const QJsonObject json)
         musicList << m;
     }
 }
+

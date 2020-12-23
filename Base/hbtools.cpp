@@ -56,10 +56,22 @@ bool getBool(const QJsonObject json, const QString key)
     }
     if (value.isDouble())
     {
-        int ret = value.toDouble();
+        int ret = value.toInt();
         return ret != 0;
     }
     return false;
+}
+
+QJsonObject jsonFromStr(const QString str)
+{
+    QJsonDocument doc = QJsonDocument::fromJson(str.toStdString().c_str());
+    return doc.object();
+}
+
+QByteArray stringFromJson(const QJsonObject json, QJsonDocument::JsonFormat formate)
+{
+    QJsonDocument doc(json);
+    return doc.toJson(formate);
 }
 
 

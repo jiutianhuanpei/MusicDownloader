@@ -16,14 +16,13 @@ public:
 
 //    QString showText();
 
-    HBItem *parentItem() { return  m_parentItem;};
+    HBItem *parentItem() { return  m_parentItem;}
 
     void appendChild(HBItem *item);
     HBItem *child(const int row);
 
     int childrenNum() { return m_childItems.count();};
-    int columnNum() { return m_data.count();};
-
+    int columnNum() { return m_data.count();}
 
     QVariant data(const int column);
 

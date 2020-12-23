@@ -1,5 +1,11 @@
 <RCC>
     <qresource prefix="/">
         <file>Res/Image/search.png</file>
+        <file>Res/Image/ico_download.png</file>
+        <file>Res/Image/ico_download_disable.png</file>
+        <file>Res/Image/icon_close.png</file>
+        <file>Res/Image/img_radio_nor.png</file>
+        <file>Res/Image/img_radio_sel.png</file>
+        <file>Res/Image/icon_sz.png</file>
     </qresource>
 </RCC>

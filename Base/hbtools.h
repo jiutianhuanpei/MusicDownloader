@@ -15,6 +15,9 @@ QJsonArray getArray(const QJsonObject json, const QString key);
 QJsonObject getObject(const QJsonObject json, const QString key);
 bool getBool(const QJsonObject json, const QString key);
 
+QJsonObject jsonFromStr(const QString str);
+QByteArray stringFromJson(const QJsonObject json, QJsonDocument::JsonFormat formate = QJsonDocument::Indented);
+
 
 
 }

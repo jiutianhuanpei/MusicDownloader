@@ -39,6 +39,8 @@ int NetClient::httpUrlStr(const NetClient::HttpType type, const QString url, con
 
     request.setUrl(QUrl(urlStr));
 
+    qDebug() << "Url: " << urlStr;
+
     QNetworkAccessManager manager;
 
     QNetworkReply *reply;

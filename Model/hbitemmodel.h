@@ -4,6 +4,7 @@
 #include <QAbstractItemModel>
 #include "music.h"
 #include "hbitem.h"
+#include "hbmusicitem.h"
 
 class HBItemModel : public QAbstractItemModel
 {
@@ -35,11 +36,11 @@ private:
 
 private:
 
-    QList<Music *> m_data;
+//    QList<Music *> m_data;
 
 
-    HBItem *m_header;
-    HBItem *m_getItem(const QModelIndex& index) const;
+    HBMusicItem *m_header;
+    HBMusicItem *m_getItem(const QModelIndex& index) const;
 
 
 };

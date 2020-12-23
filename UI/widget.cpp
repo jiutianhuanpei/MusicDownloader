@@ -34,8 +34,8 @@ void Widget::on_pBtn_search_clicked()
 
 
     QStandardItemModel *model = new QStandardItemModel;
-    model->setHorizontalHeaderLabels(QStringList() << "歌名" << "歌手" << "状态" << "id");
-
+//    model->setHorizontalHeaderLabels(QStringList() << "歌名" << "歌手" << "状态" << "id");
+    model->setHorizontalHeaderLabels(QStringList() << "SongName" << "Songer" << "Status" << "Id");
 
 //    for (int i = 0; i < list.count(); i++) {
 
@@ -79,7 +79,7 @@ void Widget::slot_clickedTabItem(const QModelIndex &index)
 
     bool ret = false;
     NetClient::fetchMusicEnable(id.toInt(), ret);
-    ui->pLbl_status->setText(ret ? "是" : "否");
+//    ui->pLbl_status->setText(ret ? "是" : "否");
 
     QString urlStr = QString("https://music.163.com/song/media/outer/url?id=%1.mp3").arg(id);
     ui->pLbl_url->setText(urlStr);

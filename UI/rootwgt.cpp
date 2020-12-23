@@ -2,7 +2,11 @@
 #include "ui_rootwgt.h"
 #include <QtWidgets/QTreeView>
 #include <Net/netclient.h>
-#include "Model/hbitem.h"
+#include "Model/HBMusicItem.h"
+#include <QDebug>
+#include "settingwgt.h"
+#include "Base/settingconfig.h"
+#include <QProgressBar>
 
 RootWgt::RootWgt(QWidget *parent) :
     QWidget(parent),
@@ -45,6 +49,11 @@ void RootWgt::on_pBtn_next_clicked()
 
 void RootWgt::on_pBtn_download_clicked()
 {
+    HBMusicItem *item = static_cast<HBMusicItem *>(m_selectionModel->currentIndex().internalPointer());
+
+    Music *music = item->currentMusic();
+
+
 
     QString url = ui->pLbl_url->text();
 
@@ -53,25 +62,41 @@ void RootWgt::on_pBtn_download_clicked()
 
     qDebug() << url;
 
-    NetClient::downloadFile(url, "/Users/bang/Desktop", DefaultName, [](qint64 received, qint64 total) {
+    QString downloadDir = SettingCore()->setting(DownloadDirPath).toString();
+    int type = SettingCore()->setting(SaveType).toInt();
+
+
+    NetClient::downloadFile(url, downloadDir, music->showName(static_cast<NameType>(type)) + ".mp3", [&](qint64 received, qint64 total) {
 
         qDebug() << "Progress: " << received << "  " << total;
+
+        if (total == 0)
+            return ;
+
+        int pro = static_cast<int>((static_cast<float>(received) / static_cast<float>(total)) * 100);
+
+
+        ui->progressBar->setValue(pro);
+
     });
 
 }
 
 void RootWgt::slot_didSelectedItem(const QModelIndex &current, const QModelIndex &previous)
 {
-    HBItem *item = static_cast<HBItem *>(current.internalPointer());
+    Q_UNUSED(previous);
 
-    int id = item->data(3).toInt();
+    HBMusicItem *item = static_cast<HBMusicItem *>(current.internalPointer());
+
+    Music *music = item->currentMusic();
 
     bool enable = false;
-    NetClient::fetchMusicEnable(id, enable);
+    NetClient::fetchMusicEnable(music->id, enable);
 
-    ui->pLbl_status->setText(enable ? "是" : "否");
+    //ui->pLbl_status->setText(enable ? "是" : "否");
+    ui->pLbl_status->setText(enable ? "YES" : "NO");
 
-    QString urlStr = QString("https://music.163.com/song/media/outer/url?id=%1.mp3").arg(id);
+    QString urlStr = QString("https://music.163.com/song/media/outer/url?id=%1.mp3").arg(music->id);
     ui->pLbl_url->setText(urlStr);
 
 
@@ -93,5 +118,6 @@ void RootWgt::m_fetchOnePageMusic()
 
 void RootWgt::on_pBtn_setting_clicked()
 {
-
+    SettingWgt *set = new SettingWgt;
+    set->show();
 }

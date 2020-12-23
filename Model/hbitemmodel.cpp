@@ -4,7 +4,17 @@
 HBItemModel::HBItemModel( QObject *parent)
     : QAbstractItemModel(parent)
 {
-    m_header = new HBItem(QVector<QVariant>() << "歌名" << "歌手" << "状态" << "id");
+
+    QVector<QVariant> header;
+//    header << "歌名" << "歌手" << "状�? << "iid";
+    header << "SongName" << "Songer" << "Status" << "Id";
+
+    qDebug() << "Header: " << header;
+
+    Music *music = new Music;
+    music->name = "SongName";
+
+    m_header = new HBMusicItem(music);
 }
 
 void HBItemModel::setData(const QList<Music *> data)
@@ -22,7 +32,7 @@ void HBItemModel::setData(const QList<Music *> data)
 
     foreach (Music *m, data) {
 
-        HBItem *item = new HBItem(m->itemData(), m_header);
+        HBMusicItem *item = new HBMusicItem(m, m_header);
         m_header->appendChild(item);
     }
 
@@ -43,6 +53,8 @@ QVariant HBItemModel::headerData(int section, Qt::Orientation orientation, int r
 
 bool HBItemModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role)
 {
+    Q_UNUSED(value);
+
     if (orientation != Qt::Horizontal || role != Qt::EditRole)
         return false;
     return true;
@@ -50,8 +62,10 @@ bool HBItemModel::setHeaderData(int section, Qt::Orientation orientation, const 
 
 QModelIndex HBItemModel::index(int row, int column, const QModelIndex &parent) const
 {
-    HBItem *parentItem = m_getItem(parent);
-    HBItem *item = parentItem->child(row);
+    HBMusicItem *parentItem = m_getItem(parent);
+    if (parentItem == nullptr)
+        return QModelIndex();
+    HBMusicItem *item = parentItem->child(row);
     if (item)
         return createIndex(row, column, item);
 
@@ -63,8 +77,8 @@ QModelIndex HBItemModel::parent(const QModelIndex &index) const
     if (!index.isValid())
         return QModelIndex();
 
-    HBItem *item = m_getItem(index);
-    HBItem *parentItem = item->parentItem();
+    HBMusicItem *item = m_getItem(index);
+    HBMusicItem *parentItem = item->parentItem();
 
     if (parentItem == m_header || parentItem == nullptr)
         return QModelIndex();
@@ -74,7 +88,7 @@ QModelIndex HBItemModel::parent(const QModelIndex &index) const
 
 int HBItemModel::rowCount(const QModelIndex &parent) const
 {
-    HBItem *parentitem = m_getItem(parent);
+    HBMusicItem *parentitem = m_getItem(parent);
 
     return parentitem->childrenNum();
 }
@@ -91,17 +105,17 @@ QVariant HBItemModel::data(const QModelIndex &index, int role) const
     if (!index.isValid() || role != Qt::DisplayRole)
         return QVariant();
 
-    HBItem *item = m_getItem(index);
+    HBMusicItem *item = m_getItem(index);
 
     return item->data(index.column());
 
 }
 
-HBItem *HBItemModel::m_getItem(const QModelIndex &index) const
+HBMusicItem *HBItemModel::m_getItem(const QModelIndex &index) const
 {
     if (index.isValid())
     {
-        HBItem *item = static_cast<HBItem *>(index.internalPointer());
+        HBMusicItem *item = static_cast<HBMusicItem *>(index.internalPointer());
         if (item)
             return item;
     }
