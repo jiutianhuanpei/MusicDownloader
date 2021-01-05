@@ -1,5 +1,6 @@
 #include "hbmusicitem.h"
 #include "Base/settingconfig.h"
+#include <QDebug>
 
 HBMusicItem::HBMusicItem(Music *music, QObject *parent) : QObject(parent), m_music(music)
 {
@@ -45,9 +46,12 @@ void HBMusicItem::clear()
 {
     foreach (HBMusicItem *i, m_childItems)
     {
-        i->deleteLater();
+		qDebug() << "Child item clear: " << i;
+		i->clear();
     }
+	qDebug() << "Items Num: " << m_childItems.count();
     m_childItems.clear();
+	qDebug() << "Items Num: " << m_childItems.count() << "end;";
 }
 
 

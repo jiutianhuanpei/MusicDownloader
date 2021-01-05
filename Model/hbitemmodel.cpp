@@ -22,7 +22,7 @@ void HBItemModel::setData(const QList<Music *> data)
 
     if (m_header->childrenNum() > 0)
     {
-        beginRemoveRows(QModelIndex(), 0, m_header->childrenNum());
+        beginRemoveRows(QModelIndex(), 0, m_header->childrenNum() - 1);
         m_header->clear();
         endRemoveRows();
     }
@@ -53,6 +53,7 @@ QVariant HBItemModel::headerData(int section, Qt::Orientation orientation, int r
 
 bool HBItemModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role)
 {
+    Q_UNUSED(section);
     Q_UNUSED(value);
 
     if (orientation != Qt::Horizontal || role != Qt::EditRole)

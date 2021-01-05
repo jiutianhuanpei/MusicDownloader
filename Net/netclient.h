@@ -31,8 +31,7 @@ public:
 
     static int fetchMusicEnable(const int musicId, bool & enable);
 
-    static int downloadMusic(const QString urlStr);
-    static int downloadFile(const QString urlStr, const QString toDirPath, const QString fileName = "default", const std::function<void(qint64 bytesReceived, qint64 bytesTotal)>& progress = nullptr);
+    static int downloadFile(const QString urlStr, const QString toDirPath, QString &downloadFilePath, const QString fileName = "default", const std::function<void(qint64 bytesReceived, qint64 bytesTotal)>& progress = nullptr);
 
 
 signals:

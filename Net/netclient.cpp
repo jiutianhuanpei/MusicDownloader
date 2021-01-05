@@ -135,13 +135,7 @@ int NetClient::fetchMusicEnable(const int musicId, bool &enable)
     return 0;
 }
 
-int NetClient::downloadMusic(const QString urlStr)
-{
-
-    return downloadFile(urlStr, "/Users/bang/Desktop");
-}
-
-int NetClient::downloadFile(const QString urlStr, const QString toDirPath, const QString fileName, const std::function<void(qint64 bytesReceived, qint64 bytesTotal)>& progress)
+int NetClient::downloadFile(const QString urlStr, const QString toDirPath, QString &downloadFilePath, const QString fileName, const std::function<void(qint64 bytesReceived, qint64 bytesTotal)>& progress)
 {
     QNetworkRequest request;
     request.setUrl(QUrl(urlStr));
@@ -169,7 +163,7 @@ int NetClient::downloadFile(const QString urlStr, const QString toDirPath, const
     {
         qDebug() << "Enter redirection: " << redirectionUrl;
         reply->deleteLater();
-        return downloadFile(redirectionUrl, toDirPath, fileName, progress);
+        return downloadFile(redirectionUrl, toDirPath, downloadFilePath, fileName, progress);
     }
 
 
@@ -206,6 +200,6 @@ int NetClient::downloadFile(const QString urlStr, const QString toDirPath, const
     file->write(re);
     file->flush();
     file->close();
-
+    downloadFilePath = filePath;
     return 0;
 }

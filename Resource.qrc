@@ -7,5 +7,10 @@
         <file>Res/Image/img_radio_nor.png</file>
         <file>Res/Image/img_radio_sel.png</file>
         <file>Res/Image/icon_sz.png</file>
+        <file>Res/Image/tryListen.png</file>
+        <file>Res/Image/last.png</file>
+        <file>Res/Image/next.png</file>
+        <file>Res/Image/play.png</file>
+        <file>Res/Image/pause.png</file>
     </qresource>
 </RCC>

@@ -81,12 +81,14 @@ public:
 
 
     QString showName(const NameType type);
+	QString downloadUrlStr();
 };
 
 
 class MusicList : public QObject
 {
     Q_OBJECT
+
 public:
     explicit MusicList(QObject *parent = nullptr);
     ~MusicList();
@@ -96,9 +98,6 @@ public:
     int songCount;
 
     void setValue(const QJsonObject json);
-
-
-
 };
 
 

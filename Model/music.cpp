@@ -77,6 +77,12 @@ QString Music::showName(const NameType type)
     return name;
 }
 
+QString Music::downloadUrlStr()
+{
+	QString urlStr = QString("https://music.163.com/song/media/outer/url?id=%1.mp3").arg(id);
+	return urlStr;
+}
+
 
 Artist::Artist(QObject *parent) : QObject(parent)
 {
@@ -126,7 +132,9 @@ void Album::setValue(const QJsonObject json)
     artist = new Artist();
     artist->setValue(obj);
 
-    publishTime = (qint64)getDouble(json, "publishTime");
+    double time = getDouble(json, "publishTime");
+
+    publishTime = static_cast<qint64>(time);
     size = getInt(json, "size");
     copyrightId = getInt(json, "copyrightId");
     status = getInt(json, "status");

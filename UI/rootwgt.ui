@@ -41,6 +41,11 @@
 #pBtn_download
 {
 	border-image:url(:/Res/Image/ico_download.png);
+}
+
+#pBtn_tryListen
+{
+	border-image:url(:/Res/Image/tryListen.png);
 }</string>
   </property>
   <widget class="QPushButton" name="pBtn_search">
@@ -75,8 +80,8 @@
   <widget class="QTreeView" name="treeView">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>100</y>
+     <x>430</x>
+     <y>10</y>
      <width>431</width>
      <height>441</height>
     </rect>
@@ -85,8 +90,8 @@
   <widget class="QPushButton" name="pBtn_last">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>580</y>
+     <x>490</x>
+     <y>480</y>
      <width>112</width>
      <height>32</height>
     </rect>
@@ -98,97 +103,14 @@
   <widget class="QPushButton" name="pBtn_next">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>580</y>
+     <x>740</x>
+     <y>480</y>
      <width>112</width>
      <height>32</height>
     </rect>
    </property>
    <property name="text">
     <string>下一页</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pBtn_download">
-   <property name="geometry">
-    <rect>
-     <x>620</x>
-     <y>440</y>
-     <width>30</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>30</width>
-     <height>30</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>30</width>
-     <height>30</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>490</x>
-     <y>100</y>
-     <width>58</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>状态：</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>490</x>
-     <y>150</y>
-     <width>58</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>链接：</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="pLbl_status">
-   <property name="geometry">
-    <rect>
-     <x>550</x>
-     <y>100</y>
-     <width>221</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="pLbl_url">
-   <property name="geometry">
-    <rect>
-     <x>550</x>
-     <y>150</y>
-     <width>261</width>
-     <height>171</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="pBtn_setting">
@@ -216,20 +138,25 @@
     <string/>
    </property>
   </widget>
-  <widget class="QProgressBar" name="progressBar">
+  <widget class="MusicControl" name="control_wgt" native="true">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>370</y>
-     <width>331</width>
-     <height>16</height>
+     <x>10</x>
+     <y>550</y>
+     <width>861</width>
+     <height>101</height>
     </rect>
-   </property>
-   <property name="value">
-    <number>0</number>
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MusicControl</class>
+   <extends>QWidget</extends>
+   <header location="global">musiccontrol.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
